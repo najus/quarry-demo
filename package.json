@@ -1,0 +1,25 @@
+{
+  "name": "democleaning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/mimos/demo-cleaning.git"
+  },
+  "author": "Mimos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/mimos/demo-cleaning/issues"
+  },
+  "homepage": "https://gitlab.com/mimos/demo-cleaning#README",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "localtunnel": "^1.9.0"
+  }
+}

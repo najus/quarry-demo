@@ -1,0 +1,235 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Angular Material style sheet -->
+  <title>Demo - App</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body ng-app="myApp" ng-cloak>
+  <div ng-controller="AppController as vm" ng-cloak>
+    <md-content class="md-padding">
+      
+      <div ng-cloak>
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Production">
+              <md-content class="md-padding">
+                <h5>Create</h5>
+                <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+                  <div>
+                    <md-input-container>
+                      <label>Batch No</label>
+                      <input ng-model="vm.batchNo">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Enter date</label>
+                        <md-datepicker ng-model="user.submissionDate"></md-datepicker>
+                      </md-input-container>
+                  </div>
+                </md-content>
+
+                <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Cleaning
+                          </button>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                          Participants
+                          <form ng-submit="vm.saveParticipants(vm.Participants)" name="form">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <md-select ng-model="vm.participantName" placeholder="Choose">
+                                <md-option ng-value="participant.value" ng-repeat="participant in vm.participantsList">{{participant.name}}</md-option>
+                              </md-select>
+                            </div>
+                              <div class="col-sm-3">
+                                <md-input-container class="md-block">
+                                    <label>Name</label>
+                                    <input type="text" ng-model="vm.Participants.name" name="vm.Machine.machineHour">                                    
+                                </md-input-container>
+                              </div>
+                              <div class="">
+                                  <md-button type="submit" class="md-raised md-primary">Add</md-button>
+                              </div>
+                            </form>
+                          </div>
+                          <div ng-show="vm.participantName == 'machine'">
+                          <p>
+                            New {{vm.participantName.slice(0, 1).toUpperCase() + vm.participantName.slice(1).toLowerCase()}}
+                          </p>
+                            <form ng-submit="vm.saveMachine(vm.Machine)" name="form">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <md-input-container class="md-block">
+                                          <label>Machine Hour</label>
+                                          <input type="text" ng-model="vm.Machine.machineHour" name="vm.Machine.machineHour">
+                                      </md-input-container>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <md-input-container class="md-block">
+                                            <label>Machine Operator</label>
+                                          <input type="text" ng-model="vm.Machine.machineOperator" name="vm.Machine.machineOperator">
+                                        </md-input-container>
+                                      </div>
+                                      <div class="col-sm-2">
+                                          <md-input-container class="md-block">
+                                            <label>Machine Diesel</label>
+                                          <input type="text" ng-model="vm.Machine.machineDiesel" name="text">
+                                        </md-input-container>
+                                      </div>
+                                      <div class="">
+                                          <md-button type="submit" class="md-raised md-primary">Save</md-button>
+                                      </div>
+                                </div>
+                            </form>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Machine Hour</th>
+                                    <th scope="col">Machine Operator</th>
+                                    <th scope="col">Machine Diesel</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="data in vm.machineList">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{data.machineHour}}</td>
+                                    <td>{{data.machineOperator}}</td>
+                                    <td>{{data.machineDiesel}}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                          </div>
+
+                          <!-- for men -->
+                          <div ng-show="vm.participantName == 'men'">
+                              <p>
+                                New {{vm.participantName.slice(0, 1).toUpperCase() + vm.participantName.slice(1).toLowerCase()}}                                
+                              </p>
+                                <form ng-submit="vm.saveMen(vm.Men)" name="">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <md-input-container class="md-block">
+                                              <label>Men Hour</label>
+                                              <input type="text" ng-model="vm.Men.menHour" name="vm.Men.menHour">
+                                          </md-input-container>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <md-input-container class="md-block">
+                                                <label>Name</label>
+                                              <input type="text" ng-model="vm.Men.menName" name="vm.Men.menName">
+                                            </md-input-container>
+                                          </div>
+                                          <div class="">
+                                              <md-button type="submit" class="md-raised md-primary">Save</md-button>
+                                          </div>
+                                    </div>
+                                </form>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Men Hour</th>
+                                        <th scope="col">Name</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="data in vm.menList">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{data.menHour}}</td>
+                                        <td>{{data.menName}}</td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Blasting
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                          Blasting.. 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="loadingHeading">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Loading
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="loadingHeading" data-parent="#accordion">
+                        <div class="card-body">
+                          Loading.. 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="weightHeading">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#weight" aria-expanded="false" aria-controls="weight">
+                              Weight
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="weight" class="collapse" aria-labelledby="weightHeading" data-parent="#accordion">
+                          <div class="card-body">
+                            Weight..
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+              </md-content>
+            </md-tab>
+            <md-tab label="Sales">
+              <md-content class="md-padding">
+                <h1 class="md-display-2">Sales</h1>
+                <p class="text-center">Under huge traffic!!</p>
+              </md-content>
+            </md-tab>
+            <md-tab label="Master">
+              <md-content class="md-padding">
+                <h1 class="md-display-2">Master</h1>
+                <p class="text-center">Under huge traffic!!</p>                
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>      
+    </md-content>
+  </div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
